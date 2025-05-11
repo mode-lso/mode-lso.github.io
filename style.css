@@ -33,7 +33,7 @@ body {
   }
   /* Hero for index.html (main page) */
 .hero.index {
-  background-image: url("images/Max Dn/AIR+MAX+DN8 (1).avif");
+  background-image: url("images/Max Dn/Air-Max-DN-1536x864.webp");
 }
 
 /* Hero for portal.html */
@@ -79,7 +79,7 @@ body {
 
 /* Add more hero classes for other pages as needed */
 .hero.af1 {
-  background-image: url("images/af1/d31f3ad3bab78dff5514f4a208eeb78b.jpg");
+  background-image: url("images/af1/AIR+FORCE+1+'07.avif");
 }
 
 
@@ -163,6 +163,20 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+  }
+  
+  button:hover {
+    background: #128C7E; /* Darker WhatsApp green */
+  }
+  
+  button i {
+    font-size: 18px;
   }
 .collections {
   display: grid;
