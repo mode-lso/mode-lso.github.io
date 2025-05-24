@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <img src="images/logo-removebg-preview.png" alt="Sneaker Store Logo">
+      </a>
+      <ul class="navbar-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <div class="navbar-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+
+  <section class="faq-section">
+    <h1>Quick Assists</h1>
+    <p>Answers to our most frequently asked questions are just one click away.</p>
+
+    <div class="faq-columns">
+      <div class="faq-box">
+        <h3>Returns</h3>
+        <div class="faq-item">
+          <button class="faq-question">What is Mode's returns policy?</button>
+          <div class="faq-answer">Mode allows returns within 3 days of purchase. The item must be unworn and in original condition.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Where is my refund?</button>
+          <div class="faq-answer">Refunds are typically processed within 3-7 business days after receiving your return.</div>
+        </div>
+      </div>
+
+      <div class="faq-box">
+        <h3>Dispatch & Delivery</h3>
+        <div class="faq-item">
+          <button class="faq-question">What Are Mode's Delivery Options?</button>
+          <div class="faq-answer">You will be updated at least 2 hours before the delivery is made at an agreed pick-up location.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can My Mode Order Be Dispatched Internationally?</button>
+          <div class="faq-answer">Mode dispatches to all Lesotho districts only.</div>
+        </div>
+      </div>
+
+      <div class="faq-box">
+        <h3>Orders & Payment</h3>
+        <div class="faq-item">
+          <button class="faq-question">Can I Cancel or Change My Mode Order?</button>
+          <div class="faq-answer">You can cancel or change an order within 30 minutes of placing it.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What are Mode's payment options?</button>
+          <div class="faq-answer">
+            M-pesa: +266 5815 1667<br>
+            EcoCach: +266 6303 1771
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-box">
+        <h3>Shopping</h3>
+        <div class="faq-item">
+          <a href="size.html" class="faq-question">How Do I Find the Right Size and Fit?</a>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How do I use a Nike promo code?</button>
+          <div class="faq-answer">As you send proof of payment, include the code to claim your discount</div>
+        </div>
+      </div>
+
+      <div class="faq-box">
+        <h3>Premium Aftercare Service</h3>
+        <div class="faq-item">
+          <button class="faq-question">Do you offer cleaning services?</button>
+          <div class="faq-answer">You have the option of paying on Monthly Subscription or One-Time.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can you customize my kicks?</button>
+          <div class="faq-answer">Mode can customize your sneakers very cheaply. Prices vary on the complexity of the art.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <h1>Contact Us</h1>
+    <p>We're here to help. Choose your preferred contact method below.</p>
+
+    <div class="contact-options">
+      <div class="contact-box">
+        <h3>📞 Call Us</h3>
+        <p>Phone support is available Mon-Fri, 9am-5pm.</p>
+        <a href="tel:+26663031771">+266 6303 1771</a>
+      </div>
+
+      <div class="contact-box">
+        <h3>💬 WhatsApp Chat</h3>
+        <p>Reach out to us via WhatsApp for quick support.</p>
+        <a href="https://wa.me/26663031771" target="_blank">Start Chat</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Mobile menu toggle functionality
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbarMenu = document.querySelector('.navbar-menu');
+
+    if (mobileMenu && navbarMenu) {
+      mobileMenu.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navbarMenu.classList.toggle('active');
+      });
+
+      // Close menu when clicking on links
+      document.querySelectorAll('.navbar-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+          navbarMenu.classList.remove('active');
+        });
+      });
+    }
+
+    // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(button => {
+      // Skip if it's an anchor tag (size guide link)
+      if (button.tagName === 'BUTTON') {
+        button.addEventListener('click', () => {
+          // Close all other answers first
+          document.querySelectorAll('.faq-answer').forEach(answer => {
+            if (answer !== button.nextElementSibling) {
+              answer.classList.remove('open');
+            }
+          });
+
+          // Toggle the clicked answer
+          const answer = button.nextElementSibling;
+          answer.classList.toggle('open');
+        });
+      }
+    });
+
+    // Hide navbar on scroll down
+    let lastScroll = 0;
+    const navbar = document.querySelector('.navbar');
+    
+    if (navbar) {
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+          navbar.classList.remove('hidden');
+          return;
+        }
+
+        if (currentScroll > lastScroll && !navbar.classList.contains('hidden')) {
+          navbar.classList.add('hidden');
+        } else if (currentScroll < lastScroll && navbar.classList.contains('hidden')) {
+          navbar.classList.remove('hidden');
+        }
+
+        lastScroll = currentScroll;
+      });
+    }
+  </script>
+</body>
+</html>
