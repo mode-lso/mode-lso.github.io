@@ -38,16 +38,16 @@ body {
 
 /* Hero for portal.html */
 .hero.portal {
-  background-image: url("images/69e6ec6263cfc3999c3590b872a4f166.jpg");
+  background-image: url("images/AIR portal/69e6ec6263cfc3999c3590b872a4f166.jpg");
 }
 
 /* Add more hero classes for other pages as needed */
 .hero.dn {
-  background-image: url("images/Max Dn/AIR+MAX+DN8 (1).avif");
+  background-image: url("images/AIR Dn/AIR+MAX+DNB.avif");
 }
 
 .hero.tn {
-  background-image: url("images/Plus Tn/AIR+MAX+PLUS (1).avif");
+  background-image: url("images/AIR Plus Tn/air-max-plus-drift-summit-white.webp");
 }
 /* Hero for index.html (main page) */
 .hero.sndr {
@@ -56,16 +56,16 @@ body {
 
 /* Hero for portal.html */
 .hero.shox {
-  background-image: url("images/Shox Tl/NIKE+SHOX+TL.png");
+  background-image: url("images/AIR Shox Tl/AIR+MAX+TL+2.5 Black-Citron.avif");
 }
 
 /* Add more hero classes for other pages as needed */
 .hero.j4 {
-  background-image: url("images/J4/air-jordan-4-retro-off-white-sail-cv9388-100-resellzone-1.webp");
+  background-image: url("images/AIR jordans/Air Jordan 11 Retro 'Legend Blue'.avif");
 }
 
 .hero.j1 {
-  background-image: url("images/J1/1c30c6d5105dcee4344bd4ef655569c1.jpg");
+  background-image: url("images/J1/WMNS+AIR+JORDAN+1+MM+LOW.avif");
 }
 /* Hero for index.html (main page) */
 .hero.dunk {
@@ -74,14 +74,33 @@ body {
 
 /* Hero for portal.html */
 .hero.adidas {
-  background-image: url("images/adidas/100152085312000_5_1705407384943.webp");
+  background-image: url("images/adidas/Ozgaia_Shoes_Pink_IG6049_04_standard.avif");
 }
+/* Hero for portal.html */
+.hero.balenciaga {
+  background-image: url("images/balenciaga/all over logo.jpg");
+}
+
 
 /* Add more hero classes for other pages as needed */
 .hero.af1 {
   background-image: url("images/af1/AIR+FORCE+1+'07.avif");
 }
 
+/* Hero for portal.html */
+.hero.nb {
+  background-image: url("images/New Balance/9060 white.webp");
+}
+
+/* Hero for portal.html */
+.hero.un {
+  background-image: url("images/balenciaga/all over logo.jpg");
+}
+
+/* Hero for portal.html */
+.hero.zoom {
+  background-image: url("images/balenciaga/all over logo.jpg");
+}
 
   
   .hero h1 {
