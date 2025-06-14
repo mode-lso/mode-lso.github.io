@@ -125,3 +125,6 @@ document.querySelectorAll('.order-button').forEach(button => {
     placeOrder(productName);
   });
 });
+
+
+
