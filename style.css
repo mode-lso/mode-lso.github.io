@@ -668,3 +668,36 @@ th, td {
   max-width: 90%;
   transition: all 0.3s;
 }
+
+
+
+
+/* Simple Bouncing Scroll Prompt */
+.scroll-prompt {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  z-index: 3;
+  text-align: center;
+}
+
+.scroll-prompt p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  animation: bounce 1.5s infinite;
+}
+
+.scroll-prompt i {
+  font-size: 14px;
+}
+
+/* Keep your existing bounce animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
