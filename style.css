@@ -669,9 +669,6 @@ th, td {
   transition: all 0.3s;
 }
 
-
-
-
 /* Simple Bouncing Scroll Prompt */
 .scroll-prompt {
   position: absolute;
@@ -701,3 +698,4 @@ th, td {
   40% { transform: translateY(-10px); }
   60% { transform: translateY(-5px); }
 }
+
