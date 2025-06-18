@@ -1,4 +1,27 @@
 // =====================
+// Dynamic Affiliate Tracking (Single-Link Solution)
+// =====================
+(function() {
+  // 1. Get 'ref' ID from URL (e.g., ?ref=jane)
+  const urlParams = new URLSearchParams(window.location.search);
+  const affiliateId = urlParams.get('ref');
+
+  // 2. Save to browser storage if 'ref' exists
+  if (affiliateId) {
+    localStorage.setItem('affiliateRef', affiliateId);
+    
+    // 3. Auto-add ?ref=ID to all internal links (for navigation)
+    document.querySelectorAll('a[href*="yourwebsite.com"], a[href^="/"], a[href^="./"]').forEach(link => {
+      if (link.href.includes('#')) return; // Skip anchor links
+      const url = new URL(link.href, window.location.origin);
+      if (!url.searchParams.has('ref')) {
+        url.searchParams.set('ref', affiliateId);
+        link.href = url.toString();
+      }
+    });
+  }
+})();
+// =====================
 // Mobile Menu Toggle
 // =====================
 const mobileMenu = document.getElementById('mobile-menu');
@@ -112,8 +135,10 @@ document.querySelectorAll('.faq-question').forEach(button => {
 // Product Order Buttons
 // =====================
 function placeOrder(productName) {
-  const phoneNumber = "26663031771"; 
-  const message = `I want to order: ${productName}.`;
+  const phoneNumber = "26663031771";
+  const affiliateRef = localStorage.getItem('affiliateRef') || '';
+  const referralText = affiliateRef ? ` (Referred by: ${affiliateRef})` : '';
+  const message = `I want to order: ${productName}.${referralText}`;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   window.open(whatsappUrl, "_blank");
 }
