@@ -135,10 +135,30 @@ document.querySelectorAll('.faq-question').forEach(button => {
 // Product Order Buttons
 // =====================
 function placeOrder(productName) {
-  const phoneNumber = "26663031771";
-  const affiliateRef = localStorage.getItem('affiliateRef') || '';
-  const referralText = affiliateRef ? ` (Referred by: ${affiliateRef})` : '';
-  const message = `I want to order: ${productName}.${referralText}`;
+  // Default WhatsApp number (yours)
+  let phoneNumber = "26663031771";
+  
+  // Get affiliate ID from URL or localStorage
+  const urlParams = new URLSearchParams(window.location.search);
+  const affiliateId = urlParams.get('ref') || localStorage.getItem('affiliateRef');
+  
+  // If affiliate ID exists, use their WhatsApp number
+  if (affiliateId) {
+    // Replace with your actual affiliate mapping
+    const affiliateNumbers = {
+      'ambjohn': '26658849859',     // REPLACE with ambjohn's actual WhatsApp number
+      'styylo4mode':'26663568230',    // REPLACE with example2's actual number
+      'example3': '26655556666',    // REPLACE with example3's actual number
+      // Add more affiliates here following the same pattern
+    };
+    
+    // If affiliate exists in your list, use their number
+    if (affiliateNumbers[affiliateId]) {
+      phoneNumber = affiliateNumbers[affiliateId];
+    }
+  }
+  
+  const message = `I want to order: ${productName}`;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   window.open(whatsappUrl, "_blank");
 }
