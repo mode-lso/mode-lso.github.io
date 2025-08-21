@@ -132,28 +132,51 @@ document.querySelectorAll('.faq-question').forEach(button => {
 });
 
 // =====================
-// Product Order Buttons
+// SIMPLE Affiliate Tracking
 // =====================
-function placeOrder(productName) {
-  // Default WhatsApp number (yours)
-  let phoneNumber = "26663031771";
-  
-  // Get affiliate ID from URL or localStorage
+(function() {
+  // 1. Get 'ref' ID from URL (e.g., ?ref=ambjohn)
   const urlParams = new URLSearchParams(window.location.search);
-  const affiliateId = urlParams.get('ref') || localStorage.getItem('affiliateRef');
-  
-  // If affiliate ID exists, use their WhatsApp number
+  const affiliateId = urlParams.get('ref');
+
+  // 2. Save to browser storage if 'ref' exists
   if (affiliateId) {
-    // Replace with your actual affiliate mapping
-    const affiliateNumbers = {
-      'ambjohn': '26658849859',     // REPLACE with ambjohn's actual WhatsApp number
-      'styylo4mo':'26663568230',    // REPLACE with example2's actual number
-      'example3': '26655556666',    // REPLACE with example3's actual number
-      // Add more affiliates here following the same pattern
-    };
+    localStorage.setItem('affiliateRef', affiliateId);
+    console.log("Affiliate set:", affiliateId);
     
-   // =====================
-// Product Order Buttons
+    // Show a subtle notification
+    showAffiliateNotification(affiliateId);
+  }
+})();
+
+// Show a subtle notification that you're browsing via affiliate
+function showAffiliateNotification(affiliateId) {
+  const notification = document.createElement('div');
+  notification.innerHTML = `Referred by: ${affiliateId}`;
+  notification.style.position = 'fixed';
+  notification.style.bottom = '20px';
+  notification.style.right = '20px';
+  notification.style.backgroundColor = '#1A6FDF';
+  notification.style.color = 'white';
+  notification.style.padding = '8px 12px';
+  notification.style.borderRadius = '4px';
+  notification.style.fontSize = '14px';
+  notification.style.zIndex = '1000';
+  notification.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+  notification.id = 'affiliate-notification';
+  
+  document.body.appendChild(notification);
+  
+  // Auto-hide after 5 seconds
+  setTimeout(() => {
+    notification.style.opacity = '0';
+    notification.style.transition = 'opacity 0.5s';
+    setTimeout(() => notification.remove(), 500);
+  }, 5000);
+}
+
+// =====================
+// Product Order Function
 // =====================
 function placeOrder(productName) {
   // Default WhatsApp number (yours)
@@ -161,43 +184,42 @@ function placeOrder(productName) {
   
   // Get affiliate ID from URL or localStorage
   const urlParams = new URLSearchParams(window.location.search);
-  const affiliateId = urlParams.get('ref') || localStorage.getItem('affiliateRef');
+  let affiliateId = urlParams.get('ref') || localStorage.getItem('affiliateRef');
   
-  // Debug: Show what affiliate ID was found
   console.log("Affiliate ID found:", affiliateId);
   
   // If affiliate ID exists, use their WhatsApp number
   if (affiliateId) {
-    // Replace with your actual affiliate mapping
+    // SIMPLIFIED: Direct mapping of affiliate IDs to numbers
     const affiliateNumbers = {
-      'ambjohn': '26658849859',     // REPLACE with ambjohn's actual WhatsApp number
-      'styylo4mode': '26663568230',   // REPLACE with styylo4mo's actual number
-      'example3': '26655556666',    // REPLACE with example3's actual number
-      // Add more affiliates here following the same pattern
+      'ambjohn': '26658849859',
+      'styylo4mode': '26663568230',
+      // Add new affiliates here: 'username': 'whatsapp-number'
     };
-    
-    // Debug: Show all affiliate numbers
-    console.log("Affiliate numbers:", affiliateNumbers);
     
     // If affiliate exists in your list, use their number
     if (affiliateNumbers[affiliateId]) {
       phoneNumber = affiliateNumbers[affiliateId];
       console.log("Using affiliate number:", phoneNumber);
     } else {
-      console.log("Affiliate ID not found in list, using default number");
+      console.log("Affiliate ID not found, using default number");
     }
   } else {
     console.log("No affiliate ID found, using default number");
   }
   
-  // Debug: Show final WhatsApp number
-  console.log("Final WhatsApp number:", phoneNumber);
-  
+  // Create WhatsApp message
   const message = `I want to order: ${productName}`;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  
+  // Open WhatsApp
   window.open(whatsappUrl, "_blank");
 }
 
+// =====================
+// The rest of your existing script.js code follows below...
+// (mobile menu, navbar scroll, smooth scrolling, FAQ functionality)
+// =====================
 // Initialize any product order buttons
 document.querySelectorAll('.order-button').forEach(button => {
   button.addEventListener('click', () => {
