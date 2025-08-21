@@ -147,16 +147,51 @@ function placeOrder(productName) {
     // Replace with your actual affiliate mapping
     const affiliateNumbers = {
       'ambjohn': '26658849859',     // REPLACE with ambjohn's actual WhatsApp number
-      'styylo4mode':'26663568230',    // REPLACE with example2's actual number
+      'styylo4mo':'26663568230',    // REPLACE with example2's actual number
       'example3': '26655556666',    // REPLACE with example3's actual number
       // Add more affiliates here following the same pattern
     };
     
+   // =====================
+// Product Order Buttons
+// =====================
+function placeOrder(productName) {
+  // Default WhatsApp number (yours)
+  let phoneNumber = "26663031771";
+  
+  // Get affiliate ID from URL or localStorage
+  const urlParams = new URLSearchParams(window.location.search);
+  const affiliateId = urlParams.get('ref') || localStorage.getItem('affiliateRef');
+  
+  // Debug: Show what affiliate ID was found
+  console.log("Affiliate ID found:", affiliateId);
+  
+  // If affiliate ID exists, use their WhatsApp number
+  if (affiliateId) {
+    // Replace with your actual affiliate mapping
+    const affiliateNumbers = {
+      'ambjohn': '26658849859',     // REPLACE with ambjohn's actual WhatsApp number
+      'styylo4mode': '26663568230',   // REPLACE with styylo4mo's actual number
+      'example3': '26655556666',    // REPLACE with example3's actual number
+      // Add more affiliates here following the same pattern
+    };
+    
+    // Debug: Show all affiliate numbers
+    console.log("Affiliate numbers:", affiliateNumbers);
+    
     // If affiliate exists in your list, use their number
     if (affiliateNumbers[affiliateId]) {
       phoneNumber = affiliateNumbers[affiliateId];
+      console.log("Using affiliate number:", phoneNumber);
+    } else {
+      console.log("Affiliate ID not found in list, using default number");
     }
+  } else {
+    console.log("No affiliate ID found, using default number");
   }
+  
+  // Debug: Show final WhatsApp number
+  console.log("Final WhatsApp number:", phoneNumber);
   
   const message = `I want to order: ${productName}`;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
