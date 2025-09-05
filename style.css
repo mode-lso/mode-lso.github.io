@@ -69,12 +69,12 @@ body {
 }
 /* Hero for index.html (main page) */
 .hero.dunk {
-  background-image: url("images/dunk/Nike_SB_x_Jarritos_Dunk_Low_Pro_Shoes_fea_images-1-2.webp");
+  background-image: url("images/af1/air-force-1-vs-dunk.jpg");
 }
 
 /* Hero for portal.html */
 .hero.adidas {
-  background-image: url("images/adidas/Ozgaia_Shoes_Pink_IG6049_04_standard.avif");
+  background-image: url("images/adidas/Samba_OG_Shoes_Leopard Print.avif");
 }
 /* Hero for portal.html */
 .hero.balenciaga {
@@ -84,7 +84,7 @@ body {
 
 /* Add more hero classes for other pages as needed */
 .hero.af1 {
-  background-image: url("images/af1/AIR+FORCE+1+'07.avif");
+  background-image: url("images/af1/air-force-1-vs-dunk.jpg");
 }
 
 /* Hero for portal.html */
