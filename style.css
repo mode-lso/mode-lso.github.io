@@ -699,3 +699,13 @@ th, td {
   60% { transform: translateY(-5px); }
 }
 
+.highlight {
+  animation: highlightFade 3s ease-out;
+  background-color: yellow;
+  border-radius: 8px;
+}
+
+@keyframes highlightFade {
+  0% { background-color: yellow; }
+  100% { background-color: transparent; }
+}

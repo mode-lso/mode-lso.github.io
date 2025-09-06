@@ -176,45 +176,39 @@ function showAffiliateNotification(affiliateId) {
 }
 
 // =====================
-// Product Order Function
+// Product Order Function (with product link)
 // =====================
-function placeOrder(productName) {
+function placeOrder(productName, productId) {
   // Default WhatsApp number (yours)
   let phoneNumber = "26663031771";
-  
+
   // Get affiliate ID from URL or localStorage
   const urlParams = new URLSearchParams(window.location.search);
   let affiliateId = urlParams.get('ref') || localStorage.getItem('affiliateRef');
-  
-  console.log("Affiliate ID found:", affiliateId);
-  
-  // If affiliate ID exists, use their WhatsApp number
-  if (affiliateId) {
-    // SIMPLIFIED: Direct mapping of affiliate IDs to numbers
-    const affiliateNumbers = {
-      'ambjohn': '26658849859',
-      'styylo4mode': '26663568230',
-      // Add new affiliates here: 'username': 'whatsapp-number'
-    };
-    
-    // If affiliate exists in your list, use their number
-    if (affiliateNumbers[affiliateId]) {
-      phoneNumber = affiliateNumbers[affiliateId];
-      console.log("Using affiliate number:", phoneNumber);
-    } else {
-      console.log("Affiliate ID not found, using default number");
-    }
-  } else {
-    console.log("No affiliate ID found, using default number");
+
+  // Use affiliate number if found
+  const affiliateNumbers = {
+    'ambjohn': '26658849859',
+    'styylo4mode': '26663568230',
+    // Add more affiliates here
+  };
+  if (affiliateId && affiliateNumbers[affiliateId]) {
+    phoneNumber = affiliateNumbers[affiliateId];
   }
-  
-  // Create WhatsApp message
-  const message = `I want to order: ${productName}`;
+
+  // Build product link (direct link with anchor to product)
+  const baseUrl = window.location.href.split('#')[0];
+  const productLink = `${baseUrl}#${productId}`;
+
+  // Final WhatsApp message
+  const message = `I want to order: ${productName}\n\nView product here: ${productLink}`;
+
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-  
+
   // Open WhatsApp
   window.open(whatsappUrl, "_blank");
 }
+
 
 // =====================
 // The rest of your existing script.js code follows below...
@@ -229,4 +223,17 @@ document.querySelectorAll('.order-button').forEach(button => {
 });
 
 
+// Highlight product when linked via #id
+window.addEventListener("load", () => {
+  if (window.location.hash) {
+    const product = document.querySelector(window.location.hash);
+    if (product) {
+      product.classList.add("highlight");
+      // Remove highlight after animation
+      setTimeout(() => {
+        product.classList.remove("highlight");
+      }, 3000);
+    }
+  }
+});
 
