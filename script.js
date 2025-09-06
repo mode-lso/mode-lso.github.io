@@ -226,14 +226,24 @@ document.querySelectorAll('.order-button').forEach(button => {
 
 
 // =====================
-// SIMPLE Product Highlight Effect
+// IMPROVED Product Highlight Effect
 // =====================
 function highlightProduct() {
+  // Only run on product pages
+  if (!document.body.classList.contains('product-page')) {
+    return;
+  }
+  
   // Get the product ID from URL hash
   const hash = window.location.hash;
   if (!hash) return; // Exit if no hash
   
   const productId = hash.substring(1); // Remove the # symbol
+  
+  // Remove any existing highlights first
+  document.querySelectorAll('.highlight-product').forEach(el => {
+    el.classList.remove('highlight-product');
+  });
   
   // Wait a moment for page to fully load
   setTimeout(function() {
@@ -250,10 +260,10 @@ function highlightProduct() {
       
       // Remove highlight after 5 seconds
       setTimeout(function() {
-        productElement.classList.remove('highlight-product');
+        if (productElement) {
+          productElement.classList.remove('highlight-product');
+        }
       }, 5000);
-    } else {
-      console.log('Product not found with ID:', productId);
     }
   }, 500);
 }
@@ -268,3 +278,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Also run when URL hash changes
 window.addEventListener('hashchange', highlightProduct);
+
+// Clear highlight when leaving the page
+window.addEventListener('beforeunload', function() {
+  document.querySelectorAll('.highlight-product').forEach(el => {
+    el.classList.remove('highlight-product');
+  });
+});
+
+
+
+
+
+
+// Clear highlights when clicking navigation links
+document.querySelectorAll('a[href]').forEach(link => {
+  link.addEventListener('click', function() {
+    // If this link goes to a different page, clear highlights
+    if (!this.getAttribute('href').includes('#')) {
+      document.querySelectorAll('.highlight-product').forEach(el => {
+        el.classList.remove('highlight-product');
+      });
+    }
+  });
+});

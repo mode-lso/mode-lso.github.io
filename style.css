@@ -745,3 +745,44 @@ th, td {
 .product {
   position: relative;
 }
+
+
+
+
+
+/* Fix for homepage highlight issue - ONLY hide on non-product pages */
+body:not(.product-page) .highlight-product,
+body:not(.product-page) .highlight-product::after {
+  display: none !important;
+  animation: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Make sure the highlight works on product pages */
+.product-page .highlight-product {
+  animation: strong-bounce 0.8s ease 3 !important;
+  border: 3px solid #1A6FDF !important;
+  border-radius: 12px !important;
+  position: relative;
+  z-index: 100;
+  background-color: rgba(26, 111, 223, 0.05) !important;
+}
+
+.product-page .highlight-product::after {
+  content: "🛒 ORDERED PRODUCT" !important;
+  position: absolute;
+  top: -18px;
+  right: -12px;
+  background: #1A6FDF;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  z-index: 101;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
