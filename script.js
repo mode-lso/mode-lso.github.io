@@ -226,69 +226,45 @@ document.querySelectorAll('.order-button').forEach(button => {
 
 
 // =====================
-// Product Highlight Effect (MORE ROBUST VERSION)
+// SIMPLE Product Highlight Effect
 // =====================
-function highlightOrderedProduct() {
-  // Check if URL has a product ID hash (e.g., #af1-green-black-gold)
-  const productId = window.location.hash.substring(1);
+function highlightProduct() {
+  // Get the product ID from URL hash
+  const hash = window.location.hash;
+  if (!hash) return; // Exit if no hash
   
-  if (!productId) return; // Exit if no product ID in URL
+  const productId = hash.substring(1); // Remove the # symbol
   
-  console.log("Trying to highlight product with ID:", productId);
-  
-  function tryToHighlight() {
+  // Wait a moment for page to fully load
+  setTimeout(function() {
     const productElement = document.getElementById(productId);
     
     if (productElement) {
-      console.log("Product found, highlighting:", productId);
+      console.log('Product found! Highlighting:', productId);
       
       // Scroll to the product
-      setTimeout(() => {
-        productElement.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'center'
-        });
-      }, 300);
+      productElement.scrollIntoView({behavior: 'smooth', block: 'center'});
       
-      // Add highlight effect with animation
+      // Add highlight class
       productElement.classList.add('highlight-product');
       
       // Remove highlight after 5 seconds
-      setTimeout(() => {
+      setTimeout(function() {
         productElement.classList.remove('highlight-product');
       }, 5000);
-      
-      return true;
+    } else {
+      console.log('Product not found with ID:', productId);
     }
-    
-    return false;
-  }
-  
-  // Try to highlight immediately
-  if (!tryToHighlight()) {
-    // If not found, try again after a short delay (DOM might still be loading)
-    const checkInterval = setInterval(() => {
-      if (tryToHighlight()) {
-        clearInterval(checkInterval);
-      }
-    }, 100);
-    
-    // Stop trying after 3 seconds
-    setTimeout(() => {
-      clearInterval(checkInterval);
-      console.log("Could not find product with ID:", productId);
-    }, 3000);
-  }
+  }, 500);
 }
 
-// Run the highlight function when page loads
-if (document.readyState === 'loading') {
-  // Loading hasn't finished yet
-  document.addEventListener('DOMContentLoaded', highlightOrderedProduct);
-} else {
-  // `DOMContentLoaded` has already fired
-  setTimeout(highlightOrderedProduct, 100);
-}
+// Run when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if we have a hash in the URL
+  if (window.location.hash) {
+    highlightProduct();
+  }
+});
 
-// Also run when hash changes (if user manually edits URL)
-window.addEventListener('hashchange', highlightOrderedProduct);
+// Also run when URL hash changes
+window.addEventListener('hashchange', highlightProduct);

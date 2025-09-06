@@ -322,6 +322,36 @@
   </div>
 
   <script src="script.js"></script>
-  
+<script>
+// Simple manual test function
+function testHighlight() {
+  const productElement = document.getElementById('af1-green-black-gold');
+  if (productElement) {
+    productElement.scrollIntoView({behavior: 'smooth', block: 'center'});
+    productElement.classList.add('highlight-product');
+    
+    setTimeout(function() {
+      productElement.classList.remove('highlight-product');
+    }, 5000);
+  }
+}
+
+// Auto-highlight if URL has hash - SIMPLE VERSION
+if (window.location.hash) {
+  setTimeout(function() {
+    const productId = window.location.hash.substring(1);
+    const productElement = document.getElementById(productId);
+    
+    if (productElement) {
+      productElement.scrollIntoView({behavior: 'smooth', block: 'center'});
+      productElement.classList.add('highlight-product');
+      
+      setTimeout(function() {
+        productElement.classList.remove('highlight-product');
+      }, 5000);
+    }
+  }, 800);
+}
+</script>  
 </body>
 </html>

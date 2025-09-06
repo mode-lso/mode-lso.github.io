@@ -702,45 +702,46 @@ th, td {
 
 
 
-/* Product Highlight Animation - ENHANCED */
-@keyframes product-pop {
+/* Enhanced Bounce Animation */
+@keyframes strong-bounce {
   0%, 20%, 50%, 80%, 100% { 
-    transform: translateY(0) scale(1); 
-    box-shadow: 0 0 0 rgba(26, 111, 223, 0); 
+    transform: translateY(0); 
+    box-shadow: 0 0 0 rgba(26, 111, 223, 0);
   }
   40% { 
-    transform: translateY(-20px) scale(1.05); 
-    box-shadow: 0 10px 25px rgba(26, 111, 223, 0.5); 
+    transform: translateY(-25px); 
+    box-shadow: 0 15px 30px rgba(26, 111, 223, 0.6);
   }
   60% { 
-    transform: translateY(-10px) scale(1.03); 
+    transform: translateY(-12px); 
   }
 }
 
 .highlight-product {
-  animation: product-pop 1s ease-in-out 3; /* Bounce 3 times */
+  animation: strong-bounce 0.8s ease 3; /* Bounce 3 times */
   border: 3px solid #1A6FDF !important;
-  border-radius: 10px;
+  border-radius: 12px;
   position: relative;
-  z-index: 10;
+  z-index: 100;
+  background-color: rgba(26, 111, 223, 0.05) !important;
 }
 
 .highlight-product::after {
-  content: "🛒 ORDERED";
+  content: "🛒 ORDERED PRODUCT";
   position: absolute;
-  top: -15px;
-  right: -10px;
+  top: -18px;
+  right: -12px;
   background: #1A6FDF;
   color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 13px;
   font-weight: bold;
-  z-index: 11;
+  z-index: 101;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Make sure products have position relative */
 .product {
   position: relative;
 }
-
