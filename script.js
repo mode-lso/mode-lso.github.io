@@ -223,17 +223,72 @@ document.querySelectorAll('.order-button').forEach(button => {
 });
 
 
-// Highlight product when linked via #id
-window.addEventListener("load", () => {
-  if (window.location.hash) {
-    const product = document.querySelector(window.location.hash);
-    if (product) {
-      product.classList.add("highlight");
-      // Remove highlight after animation
-      setTimeout(() => {
-        product.classList.remove("highlight");
-      }, 3000);
-    }
-  }
-});
 
+
+// =====================
+// Product Highlight Effect (MORE ROBUST VERSION)
+// =====================
+function highlightOrderedProduct() {
+  // Check if URL has a product ID hash (e.g., #af1-green-black-gold)
+  const productId = window.location.hash.substring(1);
+  
+  if (!productId) return; // Exit if no product ID in URL
+  
+  console.log("Trying to highlight product with ID:", productId);
+  
+  function tryToHighlight() {
+    const productElement = document.getElementById(productId);
+    
+    if (productElement) {
+      console.log("Product found, highlighting:", productId);
+      
+      // Scroll to the product
+      setTimeout(() => {
+        productElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }, 300);
+      
+      // Add highlight effect with animation
+      productElement.classList.add('highlight-product');
+      
+      // Remove highlight after 5 seconds
+      setTimeout(() => {
+        productElement.classList.remove('highlight-product');
+      }, 5000);
+      
+      return true;
+    }
+    
+    return false;
+  }
+  
+  // Try to highlight immediately
+  if (!tryToHighlight()) {
+    // If not found, try again after a short delay (DOM might still be loading)
+    const checkInterval = setInterval(() => {
+      if (tryToHighlight()) {
+        clearInterval(checkInterval);
+      }
+    }, 100);
+    
+    // Stop trying after 3 seconds
+    setTimeout(() => {
+      clearInterval(checkInterval);
+      console.log("Could not find product with ID:", productId);
+    }, 3000);
+  }
+}
+
+// Run the highlight function when page loads
+if (document.readyState === 'loading') {
+  // Loading hasn't finished yet
+  document.addEventListener('DOMContentLoaded', highlightOrderedProduct);
+} else {
+  // `DOMContentLoaded` has already fired
+  setTimeout(highlightOrderedProduct, 100);
+}
+
+// Also run when hash changes (if user manually edits URL)
+window.addEventListener('hashchange', highlightOrderedProduct);
