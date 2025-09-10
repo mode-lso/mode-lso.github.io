@@ -323,8 +323,8 @@ img {
   width: 100%;
   top: 0;
   z-index: 1000;
-  height: 60px; /* Reduced from implicit 70px */
-  transition: transform 0.3s ease-in-out 0.1s; /* Add this line */
+  height: 70px; /* Increased height to accommodate larger text */
+  transition: transform 0.3s ease-in-out 0.1s;
 }
 
 .navbar.hidden {
@@ -365,16 +365,16 @@ img {
 }
 
 .navbar-menu li {
-  margin-left: 1.5rem;
+  margin-left: 2rem; /* Increased spacing between menu items */
 }
 
 .navbar-menu a {
   color: #333;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600; /* Made text bolder */
   transition: color 0.3s;
-  font-size: 14px; /* Slightly smaller font */
-  padding: 5px 0; /* Tighter vertical padding */
+  font-size: 18px; /* Increased from 14px to 18px */
+  padding: 8px 0; /* Increased vertical padding */
 }
 
 .navbar-menu a:hover {
@@ -397,8 +397,8 @@ img {
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-    .navbar {
-    height: 50px; /* Even more compact on mobile */
+  .navbar {
+    height: 60px; /* Slightly taller navbar on mobile */
   }
 
   .navbar-logo img {
@@ -406,20 +406,21 @@ img {
   }
 
   .navbar-container {
-    height: 60px; /* Slightly smaller navbar on mobile */
-    padding: 0 1rem;
+    height: 60px;
+    padding: 0 1.5rem; /* Increased side padding */
   }
   
   .navbar-menu {
     position: fixed;
     left: -100%;
-    top: 50px; /* Adjusted to match navbar height */
+    top: 60px; /* Adjusted to match navbar height */
     flex-direction: column;
     background-color: #fff;
     width: 100%;
     text-align: center;
     transition: 0.3s;
     box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    padding: 20px 0; /* Added padding for mobile menu */
   }
 
   .navbar-menu.active {
@@ -427,11 +428,16 @@ img {
   }
 
   .navbar-menu li {
-    margin: 2rem 0;
+    margin: 1.5rem 0; /* Increased spacing between mobile menu items */
+  }
+
+  .navbar-menu a {
+    font-size: 20px; /* Even larger text on mobile for better touch targets */
+    padding: 12px 0; /* More padding for touch-friendly targets */
   }
 
   .navbar-toggle {
-    padding: 10px; /* Smaller click area */
+    padding: 12px; /* Larger click area */
     display: block;
   }
 
@@ -442,13 +448,14 @@ img {
   .navbar-toggle.active .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }
+  
   .logo-container {
-  margin-top: 60px;
-}
+    margin-top: 70px; /* Increased margin to account for taller navbar */
+  }
 
-.logo-container img {
-  height: 120px;
-}
+  .logo-container img {
+    height: 120px;
+  }
 
   .navbar-toggle.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
@@ -672,7 +679,7 @@ th, td {
 /* Simple Bouncing Scroll Prompt */
 .scroll-prompt {
   position: absolute;
-  bottom: 50px;
+  bottom: 75px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
