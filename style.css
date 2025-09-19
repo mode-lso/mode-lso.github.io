@@ -164,8 +164,8 @@ body {
 /* For mobile responsiveness */
 @media (max-width: 768px) {
   .hero a {
-    font-size: 16px;
-    padding: 8px 12px;
+    font-size: 20px;
+    padding: 12px 18px;
   }
 }
   
@@ -432,8 +432,8 @@ img {
   }
 
   .navbar-menu a {
-    font-size: 20px; /* Even larger text on mobile for better touch targets */
-    padding: 12px 0; /* More padding for touch-friendly targets */
+    font-size: 24px; /* Even larger text on mobile for better touch targets */
+    padding: 14px 0; /* More padding for touch-friendly targets */
   }
 
   .navbar-toggle {
@@ -475,7 +475,7 @@ img {
 
 .contact-section p {
   font-size: 18px;
-  color: #666;
+  color: #6d6d6d;
   margin-bottom: 40px;
 }
 
@@ -724,29 +724,6 @@ th, td {
   }
 }
 
-.highlight-product {
-  animation: strong-bounce 0.8s ease 3; /* Bounce 3 times */
-  border: 3px solid #1A6FDF !important;
-  border-radius: 12px;
-  position: relative;
-  z-index: 100;
-  background-color: rgba(26, 111, 223, 0.05) !important;
-}
-
-.highlight-product::after {
-  content: "🛒 ORDERED PRODUCT";
-  position: absolute;
-  top: -18px;
-  right: -12px;
-  background: #1A6FDF;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 5px;
-  font-size: 13px;
-  font-weight: bold;
-  z-index: 101;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
 
 /* Make sure products have position relative */
 .product {
@@ -798,71 +775,33 @@ body:not(.product-page) .highlight-product::after {
 
 
 
-
-
-
-
-
-
-
-/* ==================== */
-/* MOBILE IMPROVEMENTS */
-/* ==================== */
 @media (max-width: 768px) {
-  /* 1. INCREASE NAVIGATION FONT SIZE */
-  .navbar-menu a {
-    font-size: 22px; /* Increased from 18px */
-    padding: 12px 0;
-  }
-
-  /* 2. INCREASE "ALL COLLECTIONS" BUTTON SIZE */
-  .hero a {
-    font-size: 18px; /* Increased from 16px */
-    padding: 12px 20px; /* Increased padding */
-    top: 30px; /* Slightly lowered for better visibility */
-  }
-
-  /* 3. CHANGE TO 2x2 PRODUCT GRID */
-  .collections {
-    grid-template-columns: repeat(2, 1fr); /* Changed from 4 to 2 columns */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 per row */
     gap: 15px;
-    padding: 15px;
-  }
-  
-  .collection-card img {
-    height: 180px; /* Slightly reduced to fit better on mobile */
+    padding: 20px;
   }
 
-  /* 4. FIX SCROLL PROMPT VISIBILITY */
-  .hero {
-    height: 100vh; /* Ensure hero takes full viewport height */
-    min-height: -webkit-fill-available; /* Fix for mobile browsers */
-    overflow: hidden;
-    position: relative;
+  .product {
+    width: 100%; /* override fixed 300px */
+    padding: 10px;
   }
-  
+
+    /* Fix Scroll Down visibility on mobile */
+  .hero {
+    height: 100vh;               /* full screen height */
+    justify-content: flex-start; /* push contents up a bit */
+    padding-top: 60px;           /* space for navbar */
+  }
+
   .scroll-prompt {
-    bottom: 40px; /* Position higher to ensure visibility */
-    animation: fadeIn 1s ease-in-out;
+    bottom: 20px; /* move up so it's always visible */
   }
-  
-  /* Ensure content fits within viewport */
-  .hero h1 {
-    font-size: 42px; /* Slightly smaller on mobile */
-    padding: 0 15px;
-    text-align: center;
-  }
+
 }
 
-/* Additional animation for scroll prompt */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 
-/* Fix for viewport height issues on mobile iOS */
-@supports (-webkit-touch-callout: none) {
-  .hero {
-    height: -webkit-fill-available;
-  }
-}
+
+
+
