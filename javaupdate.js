@@ -320,3 +320,100 @@ document.querySelectorAll('a[href]').forEach(link => {
 
 
 
+
+// =====================
+// Affiliate tracking
+// =====================
+const urlParams = new URLSearchParams(window.location.search);
+const ref = urlParams.get("ref");
+if (ref) {
+  localStorage.setItem("affiliateId", ref);
+}
+const storedRef = localStorage.getItem("affiliateId");
+
+// =====================
+// WhatsApp Enquiry
+// =====================
+function enquireWhatsApp(productName, productId) {
+  let message = `Hello! I want to enquire about ${productName}. Product ID: ${productId}`;
+  if (storedRef) message += ` (Affiliate: ${storedRef})`;
+
+  window.open(
+    `https://wa.me/266xxxxxxxxx?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+}
+
+// =====================
+// Direct Order Checkout
+// =====================
+function orderNow(productName, productId, price) {
+  document.getElementById("checkoutModal").style.display = "block";
+  document.getElementById("productName").value = productName;
+  document.getElementById("productId").value = productId;
+  document.getElementById("price").value = price;
+  document.getElementById("affiliateId").value = storedRef || "";
+}
+
+// Close modal
+function closeModal() {
+  document.getElementById("checkoutModal").style.display = "none";
+}
+
+// =====================
+// Handle Checkout Form Submission
+// =====================
+document.addEventListener("DOMContentLoaded", () => {
+  const checkoutForm = document.getElementById("checkoutForm");
+  if (!checkoutForm) return; // prevent error on index.html
+
+  checkoutForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const statusBox = document.getElementById("checkoutStatus");
+    statusBox.innerHTML = "Processing payment...";
+
+    const orderData = {
+      productId: document.getElementById("productId").value,
+      productName: document.getElementById("productName").value,
+      price: document.getElementById("price").value,
+      size: document.getElementById("size").value,
+      quantity: document.getElementById("quantity").value,
+      customerName: document.getElementById("customerName").value,
+      phoneNumber: document.getElementById("phoneNumber").value,
+      affiliateId: document.getElementById("affiliateId").value,
+    };
+
+    try {
+      // 🔹 Replace with your real aggregator API endpoint
+      const response = await fetch("https://your-aggregator.com/api/payments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        statusBox.innerHTML = "✅ Payment successful! Thank you.";
+        highlightProduct(orderData.productId);
+        setTimeout(closeModal, 2000);
+      } else {
+        statusBox.innerHTML = "❌ Payment failed: " + (result.message || "try again");
+      }
+    } catch (err) {
+      statusBox.innerHTML = "⚠️ Error connecting to payment server.";
+      console.error(err);
+    }
+  });
+});
+
+// =====================
+// Highlight purchased product
+// =====================
+function highlightProduct(productId) {
+  const product = document.getElementById(productId);
+  if (product) {
+    product.classList.add("highlighted");
+    setTimeout(() => product.classList.remove("highlighted"), 4000);
+  }
+}
