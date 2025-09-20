@@ -198,8 +198,8 @@ body {
   }
   
 button {
-  background: white;
-  color: #1A6FDF;
+  background: #1A6FDF;
+  color: white;
   border: 2px solid #1A6FDF;
   padding: 10px 20px;
   border-radius: 5px;
@@ -214,8 +214,8 @@ button {
 }
 
 button:hover {
-  background: #1A6FDF;
-  color: white;
+  background: white;
+  color: #1A6FDF;
 }
   
   
@@ -808,15 +808,26 @@ body:not(.product-page) .highlight-product::after {
     text-align: center;
   }
   
+    /* This fixes the scroll prompt positioning */
   .scroll-prompt {
+    position: absolute;
     bottom: 30px; /* Ensure it's positioned properly */
     margin-top: auto; /* Push to bottom */
+    left: 50%;
+    transform: translateX(-50%);
   }
   
-  .hero a {
+    .hero a {
     top: 20px; /* Adjust position of "All Collections" link */
     font-size: 14px;
     padding: 8px 12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Remove the old scroll indicator styles */
+  .scroll-indicator {
+    display: none;
   }
 }
 
@@ -828,6 +839,15 @@ body:not(.product-page) .highlight-product::after {
   
   .hero h1 {
     font-size: 36px; /* Smaller heading text */
+  }
+  
+.scroll-prompt {
+    bottom: 20px; /* Move it up a bit more on very small screens */
+  }
+  
+  .hero a {
+    top: 15px;
+    font-size: 12px;
   }
 }
 
