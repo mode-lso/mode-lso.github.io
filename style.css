@@ -147,7 +147,7 @@ body {
   border-radius: 5px;
   transition: all 0.3s;
 }
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .hero-logo {
     height: 40px; /* Smaller logo on mobile */
   }
@@ -162,7 +162,7 @@ body {
 }
 
 /* For mobile responsiveness */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .hero a {
     font-size: 20px;
     padding: 12px 18px;
@@ -197,20 +197,26 @@ body {
     height: auto;
   }
   
-  button {
-    background: #1A6FDF; /* WhatsApp green */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 16px;
-    transition: all 0.3s;
-  }
+button {
+  background: white;
+  color: #1A6FDF;
+  border: 2px solid #1A6FDF;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #1A6FDF;
+  color: white;
+}
   
   
   
@@ -278,7 +284,7 @@ body {
   transform: scale(1.03); /* More subtle zoom */
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-  @media (max-width: 900px) {
+  @media (max-width: 768px) {
     .collections {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     padding: 15px;
@@ -396,7 +402,7 @@ img {
 }
 
 /* Mobile Styles */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .navbar {
     height: 60px; /* Slightly taller navbar on mobile */
   }
@@ -520,7 +526,7 @@ img {
   background-color: #1A6FDF;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .contact-options {
     flex-direction: column;
     align-items: center;
@@ -634,7 +640,7 @@ a.faq-question {
   text-decoration: underline;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .faq-columns {
     flex-direction: column;
     align-items: center;
@@ -775,7 +781,7 @@ body:not(.product-page) .highlight-product::after {
 
 
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .products {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 per row */
@@ -788,17 +794,41 @@ body:not(.product-page) .highlight-product::after {
     padding: 10px;
   }
 
-    /* Fix Scroll Down visibility on mobile */
+  /* FIXED Hero Section for Mobile */
   .hero {
-    height: 100vh;               /* full screen height */
-    justify-content: flex-start; /* push contents up a bit */
-    padding-top: 60px;           /* space for navbar */
+    height: 85vh; /* Reduced from 100vh to fit screen better */
+    padding-top: 70px; /* Account for navbar */
+    justify-content: space-between; /* Better spacing of elements */
   }
-
+  
+  .hero h1 {
+    font-size: 42px; /* Smaller text on mobile */
+    margin-top: auto; /* Push to center */
+    padding: 0 15px;
+    text-align: center;
+  }
+  
   .scroll-prompt {
-    bottom: 20px; /* move up so it's always visible */
+    bottom: 30px; /* Ensure it's positioned properly */
+    margin-top: auto; /* Push to bottom */
   }
+  
+  .hero a {
+    top: 20px; /* Adjust position of "All Collections" link */
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
 
+/* Additional improvements for very small screens */
+@media (max-width: 480px) {
+  .hero {
+    height: 80vh; /* Even shorter on very small phones */
+  }
+  
+  .hero h1 {
+    font-size: 36px; /* Smaller heading text */
+  }
 }
 
 
