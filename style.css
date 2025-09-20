@@ -794,64 +794,66 @@ body:not(.product-page) .highlight-product::after {
     padding: 10px;
   }
 
-  /* FIXED Hero Section for Mobile */
+  /* FIXED Hero Section for Mobile - OVERRIDES ALL PREVIOUS STYLES */
   .hero {
-    height: 85vh; /* Reduced from 100vh to fit screen better */
-    padding-top: 70px; /* Account for navbar */
-    justify-content: space-between; /* Better spacing of elements */
+    height: 85vh !important; /* Reduced from 100vh to fit screen better */
+    padding-top: 70px !important; /* Account for navbar */
+    justify-content: space-between !important; /* Better spacing of elements */
   }
   
   .hero h1 {
-    font-size: 42px; /* Smaller text on mobile */
-    margin-top: auto; /* Push to center */
-    padding: 0 15px;
-    text-align: center;
+    font-size: 42px !important; /* Smaller text on mobile */
+    margin-top: auto !important; /* Push to center */
+    padding: 0 15px !important;
+    text-align: center !important;
   }
   
-    /* This fixes the scroll prompt positioning */
+  /* This fixes the scroll prompt positioning */
   .scroll-prompt {
-    position: absolute;
-    bottom: 30px; /* Ensure it's positioned properly */
-    margin-top: auto; /* Push to bottom */
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute !important;
+    bottom: 30px !important; /* Ensure it's positioned properly */
+    margin-top: auto !important; /* Push to bottom */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
   }
   
-    .hero a {
-    top: 20px; /* Adjust position of "All Collections" link */
-    font-size: 14px;
-    padding: 8px 12px;
-    left: 50%;
-    transform: translateX(-50%);
+  .hero a {
+    top: 20px !important; /* Adjust position of "All Collections" link */
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
   }
   
   /* Remove the old scroll indicator styles */
   .scroll-indicator {
-    display: none;
+    display: none !important;
+  }
+  
+  /* Override the conflicting hero logo styles */
+  .hero-logo {
+    height: 40px !important; /* Smaller logo on mobile */
+    top: 10px !important;
+    left: 20px !important;
   }
 }
 
 /* Additional improvements for very small screens */
 @media (max-width: 480px) {
   .hero {
-    height: 80vh; /* Even shorter on very small phones */
+    height: 80vh !important; /* Even shorter on very small phones */
   }
   
   .hero h1 {
-    font-size: 36px; /* Smaller heading text */
+    font-size: 36px !important; /* Smaller heading text */
   }
   
-.scroll-prompt {
-    bottom: 20px; /* Move it up a bit more on very small screens */
+  .scroll-prompt {
+    bottom: 20px !important; /* Move it up a bit more on very small screens */
   }
   
   .hero a {
-    top: 15px;
-    font-size: 12px;
+    top: 15px !important;
+    font-size: 12px !important;
   }
 }
-
-
-
-
-
