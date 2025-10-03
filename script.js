@@ -2,17 +2,14 @@
 // Dynamic Affiliate Tracking (Single-Link Solution)
 // =====================
 (function() {
-  // 1. Get 'ref' ID from URL (e.g., ?ref=jane)
   const urlParams = new URLSearchParams(window.location.search);
   const affiliateId = urlParams.get('ref');
 
-  // 2. Save to browser storage if 'ref' exists
   if (affiliateId) {
     localStorage.setItem('affiliateRef', affiliateId);
-    
-    // 3. Auto-add ?ref=ID to all internal links (for navigation)
+
     document.querySelectorAll('a[href*="yourwebsite.com"], a[href^="/"], a[href^="./"]').forEach(link => {
-      if (link.href.includes('#')) return; // Skip anchor links
+      if (link.href.includes('#')) return; 
       const url = new URL(link.href, window.location.origin);
       if (!url.searchParams.has('ref')) {
         url.searchParams.set('ref', affiliateId);
@@ -21,6 +18,7 @@
     });
   }
 })();
+
 // =====================
 // Mobile Menu Toggle
 // =====================
@@ -32,13 +30,11 @@ if (mobileMenu && navbarMenu) {
     mobileMenu.classList.toggle('active');
     navbarMenu.classList.toggle('active');
     
-    // Keep navbar visible when mobile menu is open
     if (navbarMenu.classList.contains('active')) {
       document.querySelector('.navbar').classList.remove('hidden');
     }
   });
 
-  // Close mobile menu when clicking on links
   document.querySelectorAll('.navbar-menu a').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('active');
@@ -52,34 +48,29 @@ if (mobileMenu && navbarMenu) {
 // =====================
 let lastScroll = 0;
 const navbar = document.querySelector('.navbar');
-const navbarHeight = navbar.offsetHeight;
+if (navbar) {
+  const navbarHeight = navbar.offsetHeight;
 
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset;
-  
-  // Show navbar at top of page
-  if (currentScroll <= 0) {
-    navbar.classList.remove('hidden');
-    return;
-  }
-
-  // Hide navbar on scroll down, show on scroll up
-  if (currentScroll > lastScroll && !navbar.classList.contains('hidden')) {
-    // Only hide if scrolled more than 100px to prevent immediate hiding
-    if (currentScroll > 100) {
-      navbar.classList.add('hidden');
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll <= 0) {
+      navbar.classList.remove('hidden');
+      return;
     }
-  } else if (currentScroll < lastScroll && navbar.classList.contains('hidden')) {
-    navbar.classList.remove('hidden');
-  }
-
-  lastScroll = currentScroll;
-});
+    if (currentScroll > lastScroll && !navbar.classList.contains('hidden')) {
+      if (currentScroll > 100) {
+        navbar.classList.add('hidden');
+      }
+    } else if (currentScroll < lastScroll && navbar.classList.contains('hidden')) {
+      navbar.classList.remove('hidden');
+    }
+    lastScroll = currentScroll;
+  });
+}
 
 // =====================
 // Smooth Scrolling
 // =====================
-// For scroll indicator arrow
 const scrollIndicator = document.querySelector('.scroll-indicator');
 if (scrollIndicator) {
   scrollIndicator.addEventListener('click', () => {
@@ -93,7 +84,6 @@ if (scrollIndicator) {
   });
 }
 
-// Smooth scroll for all anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
@@ -111,19 +101,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // FAQ Functionality
 // =====================
 document.querySelectorAll('.faq-question').forEach(button => {
-  // Skip if it's an anchor tag (like the size guide link)
   if (button.tagName === 'BUTTON') {
     button.addEventListener('click', () => {
-      // Close all other answers first
       document.querySelectorAll('.faq-answer').forEach(answer => {
         if (answer !== button.nextElementSibling) {
           answer.classList.remove('open');
-          // Also remove 'active' class from questions
           answer.previousElementSibling.classList.remove('active');
         }
       });
-
-      // Toggle the clicked answer
       const answer = button.nextElementSibling;
       answer.classList.toggle('open');
       button.classList.toggle('active');
@@ -135,21 +120,16 @@ document.querySelectorAll('.faq-question').forEach(button => {
 // SIMPLE Affiliate Tracking
 // =====================
 (function() {
-  // 1. Get 'ref' ID from URL (e.g., ?ref=ambjohn)
   const urlParams = new URLSearchParams(window.location.search);
   const affiliateId = urlParams.get('ref');
 
-  // 2. Save to browser storage if 'ref' exists
   if (affiliateId) {
     localStorage.setItem('affiliateRef', affiliateId);
     console.log("Affiliate set:", affiliateId);
-    
-    // Show a subtle notification
     showAffiliateNotification(affiliateId);
   }
 })();
 
-// Show a subtle notification that you're browsing via affiliate
 function showAffiliateNotification(affiliateId) {
   const notification = document.createElement('div');
   notification.innerHTML = `Referred by: ${affiliateId}`;
@@ -167,7 +147,6 @@ function showAffiliateNotification(affiliateId) {
   
   document.body.appendChild(notification);
   
-  // Auto-hide after 5 seconds
   setTimeout(() => {
     notification.style.opacity = '0';
     notification.style.transition = 'opacity 0.5s';
@@ -179,131 +158,66 @@ function showAffiliateNotification(affiliateId) {
 // Product Order Function (with product link)
 // =====================
 function placeOrder(productName, productId) {
-  // Default WhatsApp number (yours)
   let phoneNumber = "26663031771";
 
-  // Get affiliate ID from URL or localStorage
   const urlParams = new URLSearchParams(window.location.search);
   let affiliateId = urlParams.get('ref') || localStorage.getItem('affiliateRef');
 
-  // Use affiliate number if found
   const affiliateNumbers = {
     'ambjohn': '26658849859',
     'styylo4mode': '26663568230',
-    // Add more affiliates here
   };
   if (affiliateId && affiliateNumbers[affiliateId]) {
     phoneNumber = affiliateNumbers[affiliateId];
   }
 
-  // Build product link (direct link with anchor to product)
   const baseUrl = window.location.href.split('#')[0];
   const productLink = `${baseUrl}#${productId}`;
 
-  // Final WhatsApp message
   const message = `I want to order: ${productName}\n\nView product here: ${productLink}`;
-
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-  // Open WhatsApp
   window.open(whatsappUrl, "_blank");
 }
-
-
-// =====================
-// The rest of your existing script.js code follows below...
-// (mobile menu, navbar scroll, smooth scrolling, FAQ functionality)
-// =====================
-
-
-
 
 // =====================
 // IMPROVED Product Highlight Effect
 // =====================
 function highlightProduct() {
-  // Only run on product pages
-  if (!document.body.classList.contains('product-page')) {
-    return;
-  }
-  
-  // Get the product ID from URL hash
+  if (!document.body.classList.contains('product-page')) return;
+
   const hash = window.location.hash;
-  if (!hash) return; // Exit if no hash
+  if (!hash) return;
   
-  const productId = hash.substring(1); // Remove the # symbol
-  
-  // Remove any existing highlights first
+  const productId = hash.substring(1);
+
+  // Remove any previous highlights
   document.querySelectorAll('.highlight-product').forEach(el => {
     el.classList.remove('highlight-product');
   });
-  
-  // Wait a moment for page to fully load
+
   setTimeout(function() {
     const productElement = document.getElementById(productId);
-    
     if (productElement) {
       console.log('Product found! Highlighting:', productId);
-      
-      // Scroll to the product
+
       productElement.scrollIntoView({behavior: 'smooth', block: 'center'});
-      
-      // Add highlight class
       productElement.classList.add('highlight-product');
-      
     }
-  }, 500);
+  }, 300);
 }
 
-// Run when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  // Check if we have a hash in the URL
-  if (window.location.hash) {
-    highlightProduct();
-  }
+// Run on full page load
+window.addEventListener('load', function() {
+  highlightProduct();
 });
 
-// Also run when URL hash changes
+// Also run when hash changes
 window.addEventListener('hashchange', highlightProduct);
 
-// Clear highlight when leaving the page
+// Clear highlights when navigating away
 window.addEventListener('beforeunload', function() {
   document.querySelectorAll('.highlight-product').forEach(el => {
     el.classList.remove('highlight-product');
   });
 });
-
-
-
-
-
-
-// Clear highlights when clicking navigation links
-document.querySelectorAll('a[href]').forEach(link => {
-  link.addEventListener('click', function() {
-    // If this link goes to a different page, clear highlights
-    if (!this.getAttribute('href').includes('#')) {
-      document.querySelectorAll('.highlight-product').forEach(el => {
-        el.classList.remove('highlight-product');
-      });
-    }
-  });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
