@@ -214,13 +214,6 @@ function placeOrder(productName, productId) {
 // The rest of your existing script.js code follows below...
 // (mobile menu, navbar scroll, smooth scrolling, FAQ functionality)
 // =====================
-// Initialize any product order buttons
-document.querySelectorAll('.order-button').forEach(button => {
-  button.addEventListener('click', () => {
-    const productName = button.dataset.productName || 'a product';
-    placeOrder(productName);
-  });
-});
 
 
 
