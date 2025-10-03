@@ -251,12 +251,6 @@ function highlightProduct() {
       // Add highlight class
       productElement.classList.add('highlight-product');
       
-      // Remove highlight after 5 seconds
-      setTimeout(function() {
-        if (productElement) {
-          productElement.classList.remove('highlight-product');
-        }
-      }, 5000);
     }
   }, 500);
 }
